@@ -13,16 +13,16 @@ const SUPABASE_ENABLED = SUPABASE_URL.length > 0 && SUPABASE_URL !== 'YOUR_SUPAB
 // =========================================================
 // SUPABASE CLIENT
 // =========================================================
-let supabase = null;
+let db = null; // named 'db' to avoid clash with window.supabase from CDN
 
 function initSupabase() {
   if (!SUPABASE_ENABLED) return;
   try {
     // @supabase/supabase-js is loaded via CDN in index.html
-    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+    db = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
   } catch (err) {
     console.warn('Supabase init failed, falling back to demo mode:', err);
-    supabase = null;
+    db = null;
   }
 }
 
@@ -68,7 +68,7 @@ async function loadPosts() {
   showSkeletons();
 
   try {
-    let query = supabase
+    let query = db
       .from('excuses')
       .select('*')
       .order('created_at', { ascending: false });
@@ -184,7 +184,7 @@ async function handleVote(postId, btn) {
 
   try {
     // Supabase RPC to increment votes safely
-    await supabase.rpc('increment_votes', { row_id: postId });
+    await db.rpc('increment_votes', { row_id: postId });
   } catch (err) {
     console.error('Vote error:', err);
   }
@@ -243,7 +243,7 @@ function initPostForm() {
 
     if (SUPABASE_ENABLED) {
       try {
-        const { data: inserted, error } = await supabase
+        const { data: inserted, error } = await db
           .from('excuses')
           .insert([{ name, city, excuse, category }])
           .select()
