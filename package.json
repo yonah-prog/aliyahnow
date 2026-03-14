@@ -2,8 +2,7 @@
   "name": "aliyah-now",
   "version": "1.0.0",
   "description": "Grassroots movement site — confronting American Jewish identity",
-  "type": "module",
-  "scripts": {
+"scripts": {
     "dev": "vercel dev",
     "deploy": "vercel --prod"
   },

@@ -1,4 +1,5 @@
-import Anthropic from '@anthropic-ai/sdk';
+/* eslint-disable @typescript-eslint/no-var-requires */
+const Anthropic = require('@anthropic-ai/sdk');
 
 const SYSTEM_PROMPT = `You are the Aliyah Now Debate AI — a sharp, empathetic, Socratic debate partner for the "Aliyah Now" grassroots movement. Your purpose is to help American Jews genuinely examine their reasons for not making aliyah.
 
@@ -34,7 +35,7 @@ TONE:
 
 IMPORTANT: Do not be a cheerleader for Israel or lecture about Jewish obligation. Be a thoughtful sparring partner who helps people think clearly about what they actually want and value.`;
 
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   if (req.method === 'OPTIONS') {
     return res.status(200).end();
   }
@@ -73,4 +74,4 @@ export default async function handler(req, res) {
     console.error('Anthropic API error:', err);
     return res.status(500).json({ error: 'AI service error. Please try again.' });
   }
-}
+};
