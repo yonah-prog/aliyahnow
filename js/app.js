@@ -17,8 +17,13 @@ let supabase = null;
 
 function initSupabase() {
   if (!SUPABASE_ENABLED) return;
-  // @supabase/supabase-js is loaded via CDN in index.html
-  supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  try {
+    // @supabase/supabase-js is loaded via CDN in index.html
+    supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+  } catch (err) {
+    console.warn('Supabase init failed, falling back to demo mode:', err);
+    supabase = null;
+  }
 }
 
 // =========================================================
@@ -610,12 +615,8 @@ function initCounters() {
 // INIT
 // =========================================================
 document.addEventListener('DOMContentLoaded', () => {
-  initSupabase();
-  initNav();
-  loadPosts();
-  initPostForm();
-  initFilters();
-  initChat();
-  initEmailForm();
-  initCounters();
+  const inits = [initSupabase, initNav, loadPosts, initPostForm, initFilters, initChat, initEmailForm, initCounters];
+  inits.forEach(fn => {
+    try { fn(); } catch (err) { console.error(`${fn.name} failed:`, err); }
+  });
 });
