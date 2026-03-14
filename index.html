@@ -1,0 +1,485 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ALIYAH NOW — The Question American Jews Won't Ask Themselves</title>
+  <meta name="description" content="A grassroots movement confronting American Jewish identity. Post your excuse. Debate our AI. Confront yourself." />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <!-- Supabase CDN (loaded conditionally) -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+
+<!--
+  SETUP: Replace these data attributes with your real credentials.
+  In production on Vercel, use environment variables — see README.
+  For local dev: add to .env.local and inject via a build step,
+  OR just paste your public anon key here (safe — it's public-read only).
+-->
+<body
+  data-supabase-url="YOUR_SUPABASE_URL"
+  data-supabase-anon="YOUR_SUPABASE_ANON_KEY"
+>
+
+  <!-- =====================================================
+       NAVIGATION
+  ====================================================== -->
+  <nav id="nav">
+    <div class="nav-inner">
+      <a href="#hero" class="nav-logo">Aliyah Now</a>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#wall">The Wall</a></li>
+        <li><a href="#debate">Debate AI</a></li>
+        <li><a href="#movement">Movement</a></li>
+        <li class="nav-cta"><a href="#wall" class="btn btn-primary btn-sm">Post My Excuse</a></li>
+      </ul>
+      <button class="nav-hamburger" id="nav-hamburger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+
+  <!-- =====================================================
+       HERO
+  ====================================================== -->
+  <section id="hero">
+    <div class="hero-bg-text" aria-hidden="true">
+      <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW ALIYAH</div>
+      <div class="hero-bg-line">NOW ALIYAH NOW ALIYAH NOW AL</div>
+      <div class="hero-bg-line">IYAH NOW ALIYAH NOW ALIYAH NOW</div>
+      <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW ALIYAH</div>
+      <div class="hero-bg-line">NOW ALIYAH NOW ALIYAH NOW</div>
+    </div>
+    <div class="hero-diagonal" aria-hidden="true"></div>
+
+    <div class="hero-content">
+      <p class="hero-overline">Grassroots Aliyah Movement · 2026</p>
+      <h1 class="hero-title">
+        <span class="line-yellow">Why</span>
+        <span class="line-solid">Are You</span>
+        <span class="line-outline">Still</span>
+        <span class="line-solid">Here?</span>
+      </h1>
+      <div class="hero-body-row">
+        <p class="hero-body">
+          Post your excuse. Debate our AI. Confront your identity.
+          This is the conversation American Jews have been avoiding
+          for a generation.
+        </p>
+        <div class="hero-btns">
+          <a href="#wall"   class="btn btn-primary  btn-lg btn-arrow">Post My Excuse</a>
+          <a href="#debate" class="btn btn-secondary btn-lg">Start the Debate</a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-scroll-hint" aria-hidden="true">
+      <span>Scroll</span>
+      <div class="hero-scroll-arrow"></div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       CAUTION TAPE MARQUEE
+  ====================================================== -->
+  <div class="marquee-wrap" aria-hidden="true">
+    <div class="marquee-inner">
+      <span class="marquee-text">WHY ARE YOU STILL HERE?</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">THE QUESTION YOU'VE BEEN AVOIDING</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">ALIYAH NOW</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">POST YOUR EXCUSE</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">DEBATE THE AI</span>
+      <span class="marquee-dot">✦</span>
+      <!-- Duplicate for seamless loop -->
+      <span class="marquee-text">WHY ARE YOU STILL HERE?</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">THE QUESTION YOU'VE BEEN AVOIDING</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">ALIYAH NOW</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">POST YOUR EXCUSE</span>
+      <span class="marquee-dot">✦</span>
+      <span class="marquee-text">DEBATE THE AI</span>
+      <span class="marquee-dot">✦</span>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       STATS BAR
+  ====================================================== -->
+  <section id="stats">
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number" data-target="7" data-suffix="K">7K</div>
+        <div class="stat-label">Americans Made Aliyah</div>
+        <div class="stat-sub">in 2025 alone</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="10000" data-suffix="+">10,000+</div>
+        <div class="stat-label">Antisemitic Incidents</div>
+        <div class="stat-sub">in the US · 2024 (ADL)</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number" data-target="3">3rd</div>
+        <div class="stat-label">Generation</div>
+        <div class="stat-sub">is when Jewish identity fades</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Good Reasons to Go</div>
+        <div class="stat-sub">Ask our AI. It'll explain.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       IDENTITY / EDITORIAL SECTION
+  ====================================================== -->
+  <section id="identity">
+    <div class="container">
+      <div class="identity-inner">
+        <div>
+          <p class="identity-label">The Conversation</p>
+          <h2 class="identity-headline">
+            The Question<br>
+            <span class="accent-yellow">You Won't</span><br>
+            <span class="text-outline">Ask Yourself</span>
+          </h2>
+        </div>
+        <div>
+          <p class="identity-body">
+            Most American Jews aren't against aliyah. They just haven't
+            thought about it seriously. Not really. There's always a reason —
+            the job, the parents, the mortgage, the vague sense that
+            <em>"the time isn't right."</em>
+          </p>
+          <p class="identity-body">
+            This site isn't here to guilt you. It's not a lecture about
+            obligation or destiny. It's a mirror. A place to say out loud
+            what you've been telling yourself quietly for years — and then
+            have someone push back.
+          </p>
+          <div class="identity-pull" style="margin-top: 32px;">
+            <p class="identity-pull-text">"I'll go when the time is right."</p>
+            <p class="identity-pull-attr">— The excuse heard 6 million times</p>
+          </div>
+          <a href="#wall" class="btn btn-secondary btn-arrow" style="margin-top: 32px;">Post Your Excuse</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       SECOND MARQUEE (orange)
+  ====================================================== -->
+  <div class="marquee-wrap" style="background: var(--color-orange); transform: rotate(1deg);" aria-hidden="true">
+    <div class="marquee-inner" style="animation-direction: reverse;">
+      <span class="marquee-text">CAREER</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">FAMILY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">SAFETY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">LANGUAGE</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">IDENTITY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">LIFESTYLE</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <!-- duplicate -->
+      <span class="marquee-text">CAREER</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">FAMILY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">SAFETY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">LANGUAGE</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">IDENTITY</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+      <span class="marquee-text">LIFESTYLE</span>
+      <span class="marquee-dot" style="color:rgba(0,0,0,0.3);">✦</span>
+    </div>
+  </div>
+
+
+  <!-- =====================================================
+       WALL OF EXCUSES — BULLETIN BOARD
+  ====================================================== -->
+  <section id="wall">
+    <div class="container">
+
+      <div class="wall-header">
+        <div class="wall-header-inner">
+          <div>
+            <p class="t-overline" style="margin-bottom: 8px;">Community Board</p>
+            <h2 class="t-section-title">
+              The Wall<br>
+              <span class="accent-yellow">of Excuses</span>
+            </h2>
+          </div>
+          <div style="text-align: right;">
+            <p class="wall-count" id="post-count">Loading...</p>
+          </div>
+        </div>
+        <p style="font-size:16px; color: var(--color-muted); max-width: 600px; margin-bottom: 24px;">
+          Real excuses from real American Jews. Read them. Vote on the ones you relate to.
+          Click "Debate This" to challenge one with our AI.
+        </p>
+
+        <!-- Filters -->
+        <div class="wall-filters">
+          <button class="filter-btn active" data-filter="all">All</button>
+          <button class="filter-btn" data-filter="Career">Career</button>
+          <button class="filter-btn" data-filter="Family">Family</button>
+          <button class="filter-btn" data-filter="Identity">Identity</button>
+          <button class="filter-btn" data-filter="Safety">Safety</button>
+          <button class="filter-btn" data-filter="Language">Language</button>
+          <button class="filter-btn" data-filter="Lifestyle">Lifestyle</button>
+        </div>
+      </div>
+
+      <div class="wall-layout">
+
+        <!-- Left: Post Feed -->
+        <div>
+          <div class="posts-feed" id="posts-feed">
+            <!-- Rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Right: Submission Form -->
+        <div>
+          <div class="post-form-card">
+            <div class="post-form-header">
+              <div class="post-form-title">Post Your Excuse</div>
+              <div class="post-form-subtitle">Anonymous · No judgment · 100% honest</div>
+            </div>
+            <form class="post-form-body" id="post-form" novalidate>
+              <div class="form-row">
+                <div class="form-group">
+                  <label class="form-label" for="post-name">Name (optional)</label>
+                  <input class="form-input" type="text" id="post-name" name="name" placeholder="Anonymous" maxlength="60" />
+                </div>
+                <div class="form-group">
+                  <label class="form-label" for="post-city">City</label>
+                  <input class="form-input" type="text" id="post-city" name="city" placeholder="New York" maxlength="60" />
+                </div>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" for="excuse-text">Why I'm Not Making Aliyah</label>
+                <textarea
+                  class="form-textarea"
+                  id="excuse-text"
+                  name="excuse"
+                  placeholder="My career, my parents, my mortgage, my dog... (be honest)"
+                  maxlength="280"
+                  required
+                ></textarea>
+                <div style="display:flex; justify-content: space-between; align-items:center;">
+                  <span class="form-helper">Posted anonymously. The AI may respond.</span>
+                  <span class="char-counter" id="char-counter">0 / 280</span>
+                </div>
+              </div>
+              <div class="form-group full">
+                <label class="form-label" for="post-category">Category</label>
+                <select class="form-select" id="post-category" name="category">
+                  <option value="Career">Career / Finances</option>
+                  <option value="Family">Family</option>
+                  <option value="Identity">Jewish Identity</option>
+                  <option value="Safety">Safety / Security</option>
+                  <option value="Language">Language / Culture</option>
+                  <option value="Lifestyle">Quality of Life</option>
+                  <option value="Other">Other</option>
+                </select>
+              </div>
+              <button type="submit" class="btn btn-primary btn-arrow form-submit-btn">
+                Post My Excuse
+              </button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       DEBATE THE AI
+  ====================================================== -->
+  <section id="debate">
+    <div class="container">
+      <div class="debate-inner">
+
+        <!-- Left: intro -->
+        <div>
+          <p class="debate-intro-label">AI Debate</p>
+          <h2 class="debate-intro-title">
+            Argue<br>
+            <span class="accent-yellow">Your</span><br>
+            <span class="text-outline">Case.</span>
+          </h2>
+          <p class="debate-intro-body">
+            Tell our AI your best reason for staying. It will listen,
+            take you seriously — and then push back with facts,
+            questions, and the occasional uncomfortable truth.
+          </p>
+          <ul class="debate-rules">
+            <li>No lectures. No guilt trips.</li>
+            <li>Responds with real data about Israel</li>
+            <li>Asks questions you haven't asked yourself</li>
+            <li>You can debate as long as you want</li>
+            <li>Or just read other people's debates on the Wall</li>
+          </ul>
+        </div>
+
+        <!-- Right: chat window -->
+        <div>
+          <div class="chat-window">
+            <div class="chat-header">
+              <div class="chat-header-left">
+                <div class="chat-dot"></div>
+                <div>
+                  <div class="chat-header-title">Debate AI — Active</div>
+                  <div class="chat-header-sub">Powered by Claude · Socratic mode</div>
+                </div>
+              </div>
+              <button class="chat-reset-btn" id="chat-reset">New Debate</button>
+            </div>
+
+            <div class="chat-messages" id="chat-messages" role="log" aria-live="polite">
+              <!-- Rendered by JS -->
+              <div class="typing-indicator" id="typing-indicator">
+                <span></span><span></span><span></span>
+              </div>
+            </div>
+
+            <div class="chat-suggestions" id="chat-suggestions">
+              <button class="suggestion-chip" data-prompt="My whole career and network is here. Starting over in Israel isn't realistic at my age.">Career & network</button>
+              <button class="suggestion-chip" data-prompt="My parents are getting older. I can't leave them.">Aging parents</button>
+              <button class="suggestion-chip" data-prompt="I'm American first. I don't feel an obligation to move to Israel.">I'm American first</button>
+              <button class="suggestion-chip" data-prompt="The security situation in Israel scares me. I have kids.">Safety concerns</button>
+            </div>
+
+            <form class="chat-input-area" id="chat-form" novalidate>
+              <label for="chat-input" class="visually-hidden">Your message</label>
+              <textarea
+                class="chat-input"
+                id="chat-input"
+                placeholder="Make your case..."
+                rows="1"
+                maxlength="500"
+              ></textarea>
+              <button type="submit" class="chat-send-btn" id="chat-send">Send</button>
+            </form>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       MOVEMENT CTA
+  ====================================================== -->
+  <section id="movement">
+    <div class="movement-bg" aria-hidden="true">
+      <span>ALIYAH</span>
+      <span>NOW</span>
+    </div>
+    <div class="movement-content">
+      <p class="movement-label">Join the Movement</p>
+      <h2 class="movement-title">
+        Fighting<br>
+        <span class="accent-yellow">for a</span><br>
+        Better<br>
+        <span class="text-outline">Future.</span>
+      </h2>
+      <p class="movement-body">
+        This isn't just a website. It's a community of American Jews
+        asking hard questions — and actually doing something about them.
+        Get updates as the movement grows.
+      </p>
+      <form class="email-form" id="email-form" novalidate>
+        <input
+          class="email-input"
+          type="email"
+          placeholder="your@email.com"
+          required
+          aria-label="Email address"
+        />
+        <button type="submit" class="email-submit">Stay in the Loop</button>
+      </form>
+      <p class="email-disclaimer">No spam. One email a month, max. Unsubscribe any time.</p>
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Aliyah Now</div>
+          <p class="footer-tagline">
+            A grassroots movement asking the question<br>
+            American Jews have been avoiding.<br>
+            <br>
+            Not affiliated with any government body<br>
+            or religious organization.
+          </p>
+        </div>
+        <div>
+          <p class="footer-nav-title">Navigate</p>
+          <ul class="footer-nav-list">
+            <li><a href="#wall">The Wall of Excuses</a></li>
+            <li><a href="#debate">Debate the AI</a></li>
+            <li><a href="#movement">Join the Movement</a></li>
+            <li><a href="style-guide.html">Style Guide</a></li>
+          </ul>
+        </div>
+        <div>
+          <p class="footer-nav-title">Resources</p>
+          <ul class="footer-nav-list">
+            <li><a href="https://www.nefeshbnefesh.org.il" target="_blank" rel="noopener">Nefesh B'Nefesh</a></li>
+            <li><a href="https://www.jewishagency.org" target="_blank" rel="noopener">Jewish Agency</a></li>
+            <li><a href="https://www.moia.gov.il" target="_blank" rel="noopener">Israel Ministry of Aliyah</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p class="footer-legal">© 2026 Aliyah Now Movement. All rights reserved.</p>
+        <p class="footer-legal">Built with intent. Hosted on Vercel.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast notification -->
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <!-- App JS -->
+  <script src="js/app.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,1675 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Style Guide — ALIYAH NOW</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,400;0,600;0,700;0,800;0,900;1,700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* =========================================================
+       CSS CUSTOM PROPERTIES — DESIGN TOKENS
+    ========================================================= */
+    :root {
+      /* Color Palette */
+      --color-black:       #0a0a0a;
+      --color-charcoal:    #111111;
+      --color-dark-gray:   #1c1c1c;
+      --color-mid-gray:    #2e2e2e;
+      --color-steel:       #4a4a4a;
+      --color-muted:       #7a7a7a;
+      --color-light:       #c8c8c8;
+      --color-white:       #f0ede8;
+
+      --color-yellow:      #f5c518;
+      --color-yellow-dim:  #c9a213;
+      --color-orange:      #e85d1a;
+      --color-red-alert:   #c0392b;
+
+      /* Typography */
+      --font-display:  'Barlow Condensed', sans-serif;
+      --font-body:     'Barlow', sans-serif;
+      --font-mono:     'IBM Plex Mono', monospace;
+
+      /* Spacing Scale */
+      --space-xs:   4px;
+      --space-sm:   8px;
+      --space-md:  16px;
+      --space-lg:  32px;
+      --space-xl:  64px;
+      --space-2xl:128px;
+
+      /* Border */
+      --border-yellow: 2px solid var(--color-yellow);
+      --border-steel:  1px solid var(--color-steel);
+    }
+
+    /* =========================================================
+       RESET & BASE
+    ========================================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--color-black);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       STYLE GUIDE CHROME
+    ========================================================= */
+    .sg-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: var(--color-charcoal);
+      border-bottom: var(--border-yellow);
+      display: flex;
+      align-items: center;
+      gap: var(--space-lg);
+      padding: var(--space-sm) var(--space-lg);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      overflow-x: auto;
+    }
+    .sg-nav-logo {
+      color: var(--color-yellow);
+      font-weight: 500;
+      white-space: nowrap;
+      margin-right: var(--space-md);
+    }
+    .sg-nav a {
+      color: var(--color-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.2s;
+    }
+    .sg-nav a:hover { color: var(--color-yellow); }
+
+    .sg-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: var(--space-xl) var(--space-lg);
+    }
+    .sg-section + .sg-section {
+      border-top: var(--border-steel);
+    }
+
+    .sg-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-sm);
+    }
+
+    .sg-section-title {
+      font-family: var(--font-display);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+      border-bottom: var(--border-steel);
+      padding-bottom: var(--space-sm);
+      margin-bottom: var(--space-xl);
+    }
+
+    .sg-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-lg);
+      align-items: flex-start;
+    }
+
+    /* =========================================================
+       SECTION: COLORS
+    ========================================================= */
+    .swatch-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: var(--space-md);
+    }
+    .swatch {
+      border-radius: 2px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+    .swatch-color {
+      height: 80px;
+    }
+    .swatch-info {
+      background: var(--color-dark-gray);
+      padding: var(--space-sm) var(--space-md);
+    }
+    .swatch-name {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-light);
+      display: block;
+    }
+    .swatch-hex {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-muted);
+    }
+
+    /* =========================================================
+       SECTION: TYPOGRAPHY
+    ========================================================= */
+    .type-specimen {
+      margin-bottom: var(--space-xl);
+    }
+    .type-meta {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-steel);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+
+    /* --- Display Sizes --- */
+    .t-hero {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 12vw, 160px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+    .t-hero-outline {
+      font-family: var(--font-display);
+      font-size: clamp(64px, 12vw, 160px);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-yellow);
+    }
+    .t-display {
+      font-family: var(--font-display);
+      font-size: clamp(36px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 0.92;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+    .t-headline {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 4vw, 48px);
+      font-weight: 700;
+      line-height: 1.0;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+    .t-subheadline {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      line-height: 1.2;
+      text-transform: uppercase;
+      color: var(--color-light);
+      letter-spacing: 0.04em;
+    }
+    .t-overline {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+    }
+    .t-body {
+      font-family: var(--font-body);
+      font-size: 16px;
+      line-height: 1.7;
+      color: var(--color-light);
+      max-width: 640px;
+    }
+    .t-caption {
+      font-family: var(--font-body);
+      font-size: 13px;
+      line-height: 1.5;
+      color: var(--color-muted);
+    }
+    .t-mono {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--color-yellow);
+    }
+
+    /* Yellow accent on headline */
+    .accent-yellow { color: var(--color-yellow); }
+    .accent-orange { color: var(--color-orange); }
+
+    /* =========================================================
+       SECTION: BUTTONS
+    ========================================================= */
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-md);
+      align-items: center;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-sm);
+      font-family: var(--font-display);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.18s, color 0.18s, transform 0.15s;
+    }
+    .btn:hover { transform: translateY(-1px); }
+    .btn:active { transform: translateY(0); }
+
+    .btn-primary {
+      background: var(--color-yellow);
+      color: var(--color-black);
+      font-size: 14px;
+      padding: 14px 32px;
+    }
+    .btn-primary:hover { background: #ffd640; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--color-yellow);
+      font-size: 14px;
+      padding: 12px 30px;
+      border: var(--border-yellow);
+    }
+    .btn-secondary:hover {
+      background: rgba(245,197,24,0.08);
+    }
+
+    .btn-ghost {
+      background: transparent;
+      color: var(--color-white);
+      font-size: 14px;
+      padding: 12px 30px;
+      border: 1px solid var(--color-steel);
+    }
+    .btn-ghost:hover {
+      border-color: var(--color-white);
+    }
+
+    .btn-danger {
+      background: var(--color-orange);
+      color: var(--color-white);
+      font-size: 14px;
+      padding: 14px 32px;
+    }
+    .btn-danger:hover { background: #ff6a28; }
+
+    .btn-sm {
+      font-size: 11px;
+      padding: 8px 18px;
+      letter-spacing: 0.14em;
+    }
+    .btn-lg {
+      font-size: 17px;
+      padding: 18px 48px;
+    }
+
+    /* Arrow decoration */
+    .btn-arrow::after {
+      content: '→';
+      font-family: var(--font-body);
+      font-weight: 400;
+      font-size: 1.1em;
+    }
+
+    /* =========================================================
+       SECTION: GRAPHIC ELEMENTS
+    ========================================================= */
+
+    /* Caution Tape */
+    .caution-tape {
+      display: flex;
+      align-items: center;
+      background: var(--color-yellow);
+      padding: 10px 0;
+      overflow: hidden;
+      transform: rotate(-1.5deg);
+      margin: var(--space-md) -var(--space-lg);
+    }
+    .caution-tape-inner {
+      display: flex;
+      gap: var(--space-xl);
+      animation: marquee 12s linear infinite;
+      white-space: nowrap;
+    }
+    .caution-tape-text {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 18px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-black);
+    }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* Diagonal Divider */
+    .diagonal-divider {
+      height: 60px;
+      background: var(--color-yellow);
+      clip-path: polygon(0 0, 100% 30%, 100% 100%, 0 70%);
+      margin: var(--space-lg) 0;
+    }
+
+    /* Repeating BG text */
+    .bg-text-wrap {
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: var(--color-charcoal);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .bg-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+      overflow: hidden;
+      opacity: 0.07;
+      pointer-events: none;
+      user-select: none;
+    }
+    .bg-text-line {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: 64px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--color-white);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .bg-text-line:nth-child(even) { margin-left: -60px; }
+    .bg-text-overlay {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* Blockquote / Pull Quote */
+    .pull-quote {
+      border-left: 4px solid var(--color-yellow);
+      padding: var(--space-md) var(--space-lg);
+      background: var(--color-dark-gray);
+      margin: var(--space-md) 0;
+    }
+    .pull-quote-text {
+      font-family: var(--font-display);
+      font-size: 28px;
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--color-white);
+      font-style: italic;
+      margin-bottom: var(--space-sm);
+    }
+    .pull-quote-attr {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--color-yellow);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    /* Tag / Badge */
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      padding: 4px 10px;
+      border-radius: 1px;
+    }
+    .tag-yellow { background: var(--color-yellow); color: var(--color-black); }
+    .tag-outline { border: 1px solid var(--color-yellow); color: var(--color-yellow); background: transparent; }
+    .tag-orange  { background: var(--color-orange); color: var(--color-white); }
+    .tag-ghost   { border: 1px solid var(--color-steel); color: var(--color-muted); }
+
+    /* Separator */
+    .sg-sep {
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+      margin: var(--space-lg) 0;
+    }
+    .sg-sep::before, .sg-sep::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--color-steel);
+    }
+    .sg-sep-text {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-muted);
+    }
+
+    /* =========================================================
+       SECTION: CARD COMPONENTS
+    ========================================================= */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: var(--space-lg);
+    }
+
+    /* Article Card */
+    .card-article {
+      background: var(--color-charcoal);
+      border: var(--border-steel);
+      overflow: hidden;
+      transition: border-color 0.2s;
+    }
+    .card-article:hover { border-color: var(--color-yellow); }
+
+    .card-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+      background: var(--color-mid-gray);
+      position: relative;
+    }
+    /* Placeholder image using CSS gradient */
+    .card-img-placeholder {
+      width: 100%;
+      height: 200px;
+      background: linear-gradient(135deg, #1c1c1c 0%, #2e2e2e 50%, #1c1c1c 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-display);
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-steel);
+      position: relative;
+      overflow: hidden;
+    }
+    .card-img-placeholder::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 10px,
+        rgba(255,255,255,0.015) 10px,
+        rgba(255,255,255,0.015) 20px
+      );
+    }
+    .card-body {
+      padding: var(--space-md) var(--space-lg);
+    }
+    .card-category {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-sm);
+    }
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 700;
+      line-height: 1.1;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-bottom: var(--space-sm);
+    }
+    .card-excerpt {
+      font-size: 14px;
+      color: var(--color-muted);
+      line-height: 1.6;
+    }
+    .card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: var(--space-md) var(--space-lg);
+      border-top: var(--border-steel);
+    }
+    .card-date {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-steel);
+      letter-spacing: 0.1em;
+    }
+    .card-read-more {
+      font-family: var(--font-display);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+      text-decoration: none;
+    }
+    .card-read-more:hover { text-decoration: underline; }
+
+    /* Stat Card */
+    .card-stat {
+      background: var(--color-dark-gray);
+      border-top: 3px solid var(--color-yellow);
+      padding: var(--space-lg);
+      text-align: center;
+    }
+    .card-stat-number {
+      font-family: var(--font-display);
+      font-size: 72px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--color-yellow);
+    }
+    .card-stat-label {
+      font-family: var(--font-display);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-light);
+      margin-top: var(--space-sm);
+    }
+    .card-stat-sub {
+      font-size: 13px;
+      color: var(--color-muted);
+      margin-top: var(--space-xs);
+    }
+
+    /* =========================================================
+       SECTION: FORM ELEMENTS
+    ========================================================= */
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-md);
+      max-width: 700px;
+    }
+    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-xs);
+    }
+    .form-group.full { grid-column: 1 / -1; }
+
+    .form-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+    }
+
+    .form-input,
+    .form-textarea,
+    .form-select {
+      background: var(--color-dark-gray);
+      border: 1px solid var(--color-steel);
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 15px;
+      padding: 12px 16px;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      border-radius: 0;
+      appearance: none;
+    }
+    .form-input::placeholder,
+    .form-textarea::placeholder { color: var(--color-steel); }
+    .form-input:focus,
+    .form-textarea:focus,
+    .form-select:focus { border-color: var(--color-yellow); }
+
+    .form-textarea { resize: vertical; min-height: 120px; }
+
+    .form-helper {
+      font-size: 12px;
+      color: var(--color-steel);
+    }
+    .form-error {
+      font-size: 12px;
+      color: var(--color-orange);
+    }
+
+    /* =========================================================
+       SECTION: HERO PREVIEW
+    ========================================================= */
+    .hero-preview {
+      background: var(--color-black);
+      min-height: 520px;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: var(--space-xl) var(--space-lg);
+      overflow: hidden;
+      border: var(--border-steel);
+    }
+    .hero-bg-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow: hidden;
+      user-select: none;
+      pointer-events: none;
+    }
+    .hero-bg-line {
+      font-family: var(--font-display);
+      font-weight: 900;
+      font-size: clamp(80px, 18vw, 200px);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      line-height: 0.85;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(245,197,24,0.12);
+      white-space: nowrap;
+    }
+    .hero-bg-line:nth-child(even) { margin-left: -40px; }
+    .hero-content { position: relative; z-index: 1; }
+    .hero-overline {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--color-yellow);
+      margin-bottom: var(--space-md);
+    }
+    .hero-title {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 10vw, 120px);
+      font-weight: 900;
+      line-height: 0.88;
+      text-transform: uppercase;
+      color: var(--color-white);
+      margin-bottom: var(--space-lg);
+    }
+    .hero-title .line-yellow { color: var(--color-yellow); }
+    .hero-title .line-outline {
+      color: transparent;
+      -webkit-text-stroke: 2px var(--color-white);
+    }
+    .hero-body {
+      max-width: 480px;
+      font-size: 16px;
+      color: var(--color-light);
+      line-height: 1.6;
+      margin-bottom: var(--space-lg);
+    }
+    .hero-diagonal {
+      position: absolute;
+      top: 0; right: 0;
+      width: 40%;
+      height: 100%;
+      background: linear-gradient(135deg, transparent 40%, rgba(245,197,24,0.04) 100%);
+      pointer-events: none;
+    }
+
+    /* =========================================================
+       SECTION: CHATBOT / MESSAGE BOARD PREVIEW
+    ========================================================= */
+    .chat-window {
+      background: var(--color-charcoal);
+      border: var(--border-steel);
+      max-width: 500px;
+      overflow: hidden;
+    }
+    .chat-header {
+      background: var(--color-dark-gray);
+      border-bottom: var(--border-yellow);
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      align-items: center;
+      gap: var(--space-md);
+    }
+    .chat-header-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--color-yellow);
+      animation: pulse 2s ease infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.3; }
+    }
+    .chat-header-title {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-light);
+    }
+    .chat-messages {
+      padding: var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .chat-msg {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .chat-msg.bot  { align-items: flex-start; }
+    .chat-msg.user { align-items: flex-end; }
+    .chat-bubble {
+      max-width: 80%;
+      padding: 10px 16px;
+      font-size: 14px;
+      line-height: 1.5;
+      border-radius: 0;
+    }
+    .chat-msg.bot  .chat-bubble { background: var(--color-dark-gray); color: var(--color-light); border-left: 2px solid var(--color-yellow); }
+    .chat-msg.user .chat-bubble { background: rgba(245,197,24,0.12); color: var(--color-white); border-right: 2px solid var(--color-yellow); }
+    .chat-sender {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--color-steel);
+    }
+    .chat-input-row {
+      display: flex;
+      border-top: var(--border-steel);
+    }
+    .chat-input {
+      flex: 1;
+      background: var(--color-dark-gray);
+      border: none;
+      color: var(--color-white);
+      font-family: var(--font-body);
+      font-size: 14px;
+      padding: 14px 16px;
+      outline: none;
+    }
+    .chat-input::placeholder { color: var(--color-steel); }
+    .chat-send-btn {
+      background: var(--color-yellow);
+      border: none;
+      color: var(--color-black);
+      font-family: var(--font-display);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0 var(--space-lg);
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .chat-send-btn:hover { background: #ffd640; }
+
+    /* Bulletin Board Post */
+    .bulletin-board {
+      background: var(--color-charcoal);
+      border: var(--border-steel);
+      max-width: 500px;
+      overflow: hidden;
+    }
+    .bulletin-header {
+      background: var(--color-dark-gray);
+      border-bottom: 2px solid var(--color-orange);
+      padding: var(--space-md) var(--space-lg);
+    }
+    .bulletin-title {
+      font-family: var(--font-display);
+      font-size: 16px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--color-white);
+    }
+    .bulletin-subtitle {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-muted);
+      letter-spacing: 0.1em;
+      margin-top: 4px;
+    }
+    .bulletin-posts {
+      padding: var(--space-md) var(--space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-md);
+    }
+    .bulletin-post {
+      border: var(--border-steel);
+      padding: var(--space-md);
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .bulletin-post:hover { border-color: var(--color-orange); }
+    .bulletin-post-author {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-yellow);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: var(--space-xs);
+    }
+    .bulletin-post-text {
+      font-size: 14px;
+      color: var(--color-light);
+      line-height: 1.5;
+    }
+    .bulletin-post-tag {
+      position: absolute;
+      top: var(--space-sm);
+      right: var(--space-sm);
+    }
+    .bulletin-votes {
+      display: flex;
+      align-items: center;
+      gap: var(--space-sm);
+      margin-top: var(--space-sm);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-steel);
+    }
+    .bulletin-vote-btn {
+      background: transparent;
+      border: 1px solid var(--color-steel);
+      color: var(--color-muted);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      padding: 3px 8px;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .bulletin-vote-btn:hover { border-color: var(--color-yellow); color: var(--color-yellow); }
+
+    /* =========================================================
+       SECTION: SPACING SCALE
+    ========================================================= */
+    .spacing-row {
+      display: flex;
+      align-items: flex-end;
+      gap: var(--space-lg);
+      flex-wrap: wrap;
+    }
+    .spacing-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-xs);
+    }
+    .spacing-box {
+      background: rgba(245,197,24,0.3);
+      border: 1px solid var(--color-yellow);
+    }
+    .spacing-label {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--color-muted);
+      text-align: center;
+    }
+
+    /* =========================================================
+       SECTION: ICONS / MOTIFS
+    ========================================================= */
+    .motif-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-xl);
+      align-items: center;
+    }
+    .motif-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--space-sm);
+    }
+    .motif-label {
+      font-family: var(--font-mono);
+      font-size: 9px;
+      color: var(--color-muted);
+      text-align: center;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    /* Star of David motif */
+    .motif-star {
+      width: 48px;
+      height: 48px;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .motif-star svg { width: 48px; height: 48px; }
+
+    /* Menorah motif */
+    .motif-menorah svg { width: 48px; height: 48px; }
+
+    /* Arrow motif */
+    .motif-arrow {
+      font-family: var(--font-display);
+      font-size: 48px;
+      font-weight: 900;
+      color: var(--color-yellow);
+      line-height: 1;
+    }
+
+    /* Question Mark */
+    .motif-question {
+      font-family: var(--font-display);
+      font-size: 64px;
+      font-weight: 900;
+      color: var(--color-yellow);
+      line-height: 1;
+    }
+
+    /* =========================================================
+       RESPONSIVE
+    ========================================================= */
+    @media (max-width: 768px) {
+      .sg-section { padding: var(--space-xl) var(--space-md); }
+      .form-grid   { grid-template-columns: 1fr; }
+      .card-grid   { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- =========================================================
+       NAV
+  ========================================================= -->
+  <nav class="sg-nav">
+    <span class="sg-nav-logo">ALIYAH NOW / Style Guide</span>
+    <a href="#colors">Colors</a>
+    <a href="#typography">Typography</a>
+    <a href="#buttons">Buttons</a>
+    <a href="#graphic-elements">Graphic</a>
+    <a href="#cards">Cards</a>
+    <a href="#forms">Forms</a>
+    <a href="#components">Components</a>
+    <a href="#hero-preview">Hero</a>
+    <a href="#spacing">Spacing</a>
+    <a href="#motifs">Motifs</a>
+  </nav>
+
+
+  <!-- =========================================================
+       INTRO
+  ========================================================= -->
+  <section class="sg-section" id="intro">
+    <div class="sg-row" style="align-items:center; justify-content:space-between; margin-bottom:var(--space-lg);">
+      <div>
+        <p class="t-overline" style="margin-bottom:var(--space-sm);">Grassroots Movement</p>
+        <h1 class="t-display">ALIYAH NOW <span class="accent-yellow">—</span></h1>
+        <h2 style="font-family:var(--font-display);font-size:24px;font-weight:600;color:var(--color-muted);text-transform:uppercase;letter-spacing:0.06em;margin-top:8px;">Brand & Style Guide</h2>
+      </div>
+      <div style="text-align:right;">
+        <p class="t-mono">v1.0</p>
+        <p class="t-caption" style="margin-top:4px;">March 2026</p>
+      </div>
+    </div>
+    <p class="t-body">
+      A visual identity system for a movement that confronts, questions, and challenges American Jews
+      to examine their identity. Dark. Urgent. Unapologetic. Drawn from the aesthetics of VICE News,
+      investigative journalism, and activist campaigns.
+    </p>
+  </section>
+
+
+  <!-- =========================================================
+       COLORS
+  ========================================================= -->
+  <section class="sg-section" id="colors">
+    <p class="sg-section-title">01 — Color Palette</p>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Primary</p>
+    <div class="swatch-grid" style="margin-bottom:var(--space-xl);">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#0a0a0a;"></div>
+        <div class="swatch-info"><span class="swatch-name">Black</span><span class="swatch-hex">#0a0a0a · --color-black</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#111111;"></div>
+        <div class="swatch-info"><span class="swatch-name">Charcoal</span><span class="swatch-hex">#111111 · --color-charcoal</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#1c1c1c;"></div>
+        <div class="swatch-info"><span class="swatch-name">Dark Gray</span><span class="swatch-hex">#1c1c1c · --color-dark-gray</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#2e2e2e;"></div>
+        <div class="swatch-info"><span class="swatch-name">Mid Gray</span><span class="swatch-hex">#2e2e2e · --color-mid-gray</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f5c518;"></div>
+        <div class="swatch-info"><span class="swatch-name">Yellow</span><span class="swatch-hex">#f5c518 · --color-yellow</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#c9a213;"></div>
+        <div class="swatch-info"><span class="swatch-name">Yellow Dim</span><span class="swatch-hex">#c9a213 · --color-yellow-dim</span></div>
+      </div>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Accent &amp; Text</p>
+    <div class="swatch-grid">
+      <div class="swatch">
+        <div class="swatch-color" style="background:#e85d1a;"></div>
+        <div class="swatch-info"><span class="swatch-name">Orange</span><span class="swatch-hex">#e85d1a · --color-orange</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#c0392b;"></div>
+        <div class="swatch-info"><span class="swatch-name">Red Alert</span><span class="swatch-hex">#c0392b · --color-red-alert</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#f0ede8; border:1px solid #333;"></div>
+        <div class="swatch-info"><span class="swatch-name">White</span><span class="swatch-hex">#f0ede8 · --color-white</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#c8c8c8;"></div>
+        <div class="swatch-info"><span class="swatch-name">Light</span><span class="swatch-hex">#c8c8c8 · --color-light</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#7a7a7a;"></div>
+        <div class="swatch-info"><span class="swatch-name">Muted</span><span class="swatch-hex">#7a7a7a · --color-muted</span></div>
+      </div>
+      <div class="swatch">
+        <div class="swatch-color" style="background:#4a4a4a;"></div>
+        <div class="swatch-info"><span class="swatch-name">Steel</span><span class="swatch-hex">#4a4a4a · --color-steel</span></div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       TYPOGRAPHY
+  ========================================================= -->
+  <section class="sg-section" id="typography">
+    <p class="sg-section-title">02 — Typography</p>
+
+    <div class="sg-row" style="margin-bottom:var(--space-xl); gap:var(--space-xl);">
+      <div>
+        <p class="sg-label">Display Font</p>
+        <p style="font-family:var(--font-display);font-size:36px;font-weight:900;text-transform:uppercase;letter-spacing:0.02em;">Barlow Condensed</p>
+        <p class="t-caption" style="margin-top:4px;">Headlines, labels, UI chrome, protest text</p>
+      </div>
+      <div>
+        <p class="sg-label">Body Font</p>
+        <p style="font-family:var(--font-body);font-size:24px;font-weight:400;">Barlow</p>
+        <p class="t-caption" style="margin-top:4px;">Body copy, descriptions, captions</p>
+      </div>
+      <div>
+        <p class="sg-label">Mono Font</p>
+        <p style="font-family:var(--font-mono);font-size:20px;font-weight:400;">IBM Plex Mono</p>
+        <p class="t-caption" style="margin-top:4px;">Labels, metadata, overlines, data</p>
+      </div>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Hero — Barlow Condensed 900 · Uppercase · ~clamp(64px, 12vw, 160px)</p>
+      <p class="t-hero">ALIYAH<br><span class="accent-yellow">NOW.</span></p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Hero Outline — Text Stroke Yellow · Same scale</p>
+      <p class="t-hero-outline">ALIYAH NOW</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Display — Barlow Condensed 800 · Uppercase · ~clamp(36px, 6vw, 80px)</p>
+      <p class="t-display">WHY ARE YOU STILL<br><span class="accent-yellow">HERE?</span></p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Headline — Barlow Condensed 700 · Uppercase · ~clamp(24px, 4vw, 48px)</p>
+      <p class="t-headline">EVERY EXCUSE HAS AN ANSWER</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Subheadline — Barlow Condensed 600 · 22px</p>
+      <p class="t-subheadline">The conversation American Jews won't have with themselves</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Overline — IBM Plex Mono 500 · 11px · 0.22em tracking</p>
+      <p class="t-overline">Grassroots Aliyah Movement · Est. 2026</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Body — Barlow 400 · 16px · 1.7 line-height</p>
+      <p class="t-body">
+        Every generation has a moment of reckoning. Ours is now. This isn't about politics or obligation —
+        it's about asking the questions most of us have been avoiding. What does it mean to be Jewish in
+        America today? And what would it mean to go home?
+      </p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Caption — Barlow 400 · 13px · Muted</p>
+      <p class="t-caption">Posted March 2026 · 4.2K views · Join the conversation ↓</p>
+    </div>
+
+    <div class="type-specimen">
+      <p class="type-meta">Mono Label — IBM Plex Mono 400 · 13px · Yellow</p>
+      <p class="t-mono">→ ACTIVE DISCUSSION: 247 reasons posted</p>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       BUTTONS
+  ========================================================= -->
+  <section class="sg-section" id="buttons">
+    <p class="sg-section-title">03 — Buttons</p>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Primary Actions</p>
+    <div class="btn-row" style="margin-bottom:var(--space-xl);">
+      <button class="btn btn-primary btn-arrow">Make Aliyah</button>
+      <button class="btn btn-primary">Join the Movement</button>
+      <button class="btn btn-primary btn-sm">Read More</button>
+      <button class="btn btn-primary btn-lg btn-arrow">Start the Debate</button>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Secondary &amp; Ghost</p>
+    <div class="btn-row" style="margin-bottom:var(--space-xl);">
+      <button class="btn btn-secondary btn-arrow">Learn More</button>
+      <button class="btn btn-ghost">Browse Stories</button>
+      <button class="btn btn-secondary btn-sm">View All</button>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Danger / Alert</p>
+    <div class="btn-row">
+      <button class="btn btn-danger btn-arrow">Post Your Excuse</button>
+      <button class="btn btn-danger btn-sm">Challenge Me</button>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       GRAPHIC ELEMENTS
+  ========================================================= -->
+  <section class="sg-section" id="graphic-elements">
+    <p class="sg-section-title">04 — Graphic Elements</p>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Caution Tape / Marquee</p>
+    <div style="margin-bottom:var(--space-xl); overflow:hidden;">
+      <div class="caution-tape">
+        <div class="caution-tape-inner">
+          <span class="caution-tape-text">WHY ARE YOU STILL HERE?</span>
+          <span class="caution-tape-text">✦</span>
+          <span class="caution-tape-text">THE QUESTION YOU'VE BEEN AVOIDING</span>
+          <span class="caution-tape-text">✦</span>
+          <span class="caution-tape-text">ALIYAH NOW</span>
+          <span class="caution-tape-text">✦</span>
+          <span class="caution-tape-text">WHY ARE YOU STILL HERE?</span>
+          <span class="caution-tape-text">✦</span>
+          <span class="caution-tape-text">THE QUESTION YOU'VE BEEN AVOIDING</span>
+          <span class="caution-tape-text">✦</span>
+          <span class="caution-tape-text">ALIYAH NOW</span>
+          <span class="caution-tape-text">✦</span>
+        </div>
+      </div>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Repeating Background Text Effect</p>
+    <div class="bg-text-wrap" style="margin-bottom:var(--space-xl);">
+      <div class="bg-text">
+        <div class="bg-text-line">ALIYAH NOW ALIYAH NOW ALIYAH NOW</div>
+        <div class="bg-text-line">ALIYAH NOW ALIYAH NOW ALIYAH NOW</div>
+        <div class="bg-text-line">ALIYAH NOW ALIYAH NOW ALIYAH NOW</div>
+      </div>
+      <div class="bg-text-overlay">
+        <p class="t-overline" style="margin-bottom:8px;">Layered type effect</p>
+        <p class="t-headline">FOREGROUND TEXT</p>
+      </div>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Pull Quote</p>
+    <div style="max-width:600px; margin-bottom:var(--space-xl);">
+      <div class="pull-quote">
+        <p class="pull-quote-text">"I'll go when the time is right."</p>
+        <p class="pull-quote-attr">— The excuse we've heard 6 million times</p>
+      </div>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Tags / Badges</p>
+    <div class="btn-row" style="margin-bottom:var(--space-xl);">
+      <span class="tag tag-yellow">Breaking</span>
+      <span class="tag tag-outline">Discussion</span>
+      <span class="tag tag-orange">Urgent</span>
+      <span class="tag tag-ghost">Archive</span>
+      <span class="tag tag-yellow">Identity</span>
+      <span class="tag tag-outline">Aliyah</span>
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Separators</p>
+    <div style="max-width:600px;">
+      <div class="sg-sep"><span class="sg-sep-text">OR</span></div>
+      <div class="sg-sep"><span class="sg-sep-text">Continue</span></div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       CARDS
+  ========================================================= -->
+  <section class="sg-section" id="cards">
+    <p class="sg-section-title">05 — Cards</p>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Article Cards</p>
+    <div class="card-grid" style="margin-bottom:var(--space-xl);">
+
+      <div class="card-article">
+        <div class="card-img-placeholder">
+          <span>[ IMAGE ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">Identity</p>
+          <h3 class="card-title">My Grandfather Survived.<br>I Survived Too.<br>But Did I?</h3>
+          <p class="card-excerpt">A third-generation American Jew confronts the gap between survival and belonging.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-date">MAR 14, 2026</span>
+          <a href="#" class="card-read-more">Read More →</a>
+        </div>
+      </div>
+
+      <div class="card-article">
+        <div class="card-img-placeholder" style="background:linear-gradient(135deg,#1c1c1c 0%,#2a2010 100%);">
+          <span>[ IMAGE ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">Debate</p>
+          <h3 class="card-title">"My Career Is Here." OK. Now What?</h3>
+          <p class="card-excerpt">The most common excuse — and why it tells us more about fear than ambition.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-date">MAR 10, 2026</span>
+          <a href="#" class="card-read-more">Read More →</a>
+        </div>
+      </div>
+
+      <div class="card-article">
+        <div class="card-img-placeholder" style="background:linear-gradient(135deg,#1a1a1a 0%,#2e2010 100%);">
+          <span>[ IMAGE ]</span>
+        </div>
+        <div class="card-body">
+          <p class="card-category">Movement</p>
+          <h3 class="card-title">7,000 Americans Made Aliyah Last Year. Why Not You?</h3>
+          <p class="card-excerpt">The data is clear. Something is shifting. The question is whether you're part of it.</p>
+        </div>
+        <div class="card-footer">
+          <span class="card-date">MAR 6, 2026</span>
+          <a href="#" class="card-read-more">Read More →</a>
+        </div>
+      </div>
+
+    </div>
+
+    <p class="sg-label" style="margin-bottom:var(--space-md);">Stat Cards</p>
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:var(--space-md);">
+      <div class="card-stat">
+        <div class="card-stat-number">7K</div>
+        <div class="card-stat-label">Americans Made Aliyah</div>
+        <div class="card-stat-sub">In 2025 alone</div>
+      </div>
+      <div class="card-stat">
+        <div class="card-stat-number">30%</div>
+        <div class="card-stat-label">Rise in Antisemitism</div>
+        <div class="card-stat-sub">US campuses, 2024–2025</div>
+      </div>
+      <div class="card-stat">
+        <div class="card-stat-number">247</div>
+        <div class="card-stat-label">Excuses Posted</div>
+        <div class="card-stat-sub">This week on the board</div>
+      </div>
+      <div class="card-stat" style="border-top-color:var(--color-orange);">
+        <div class="card-stat-number" style="color:var(--color-orange);">∞</div>
+        <div class="card-stat-label">Good Reasons to Go</div>
+        <div class="card-stat-sub">Ask our AI. It'll explain.</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       FORMS
+  ========================================================= -->
+  <section class="sg-section" id="forms">
+    <p class="sg-section-title">06 — Form Elements</p>
+
+    <div class="form-grid">
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input class="form-input" type="text" placeholder="Yonah" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input class="form-input" type="text" placeholder="Friedman" />
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input class="form-input" type="email" placeholder="you@domain.com" />
+        <span class="form-helper">We'll never share your email.</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">City</label>
+        <input class="form-input" type="text" placeholder="New York" />
+      </div>
+      <div class="form-group full">
+        <label class="form-label">Why I'm Not Making Aliyah</label>
+        <textarea class="form-textarea" placeholder="My career, my family, my mortgage, my... (be honest)"></textarea>
+        <span class="form-helper">Post anonymously to the bulletin board. The AI will respond.</span>
+      </div>
+      <div class="form-group">
+        <label class="form-label">State</label>
+        <select class="form-select">
+          <option value="">Select state</option>
+          <option>New York</option>
+          <option>California</option>
+          <option>Florida</option>
+          <option>New Jersey</option>
+          <option>Illinois</option>
+        </select>
+      </div>
+      <div class="form-group" style="justify-content:flex-end;">
+        <button class="btn btn-primary btn-arrow" style="width:100%;">Submit My Excuse</button>
+      </div>
+    </div>
+
+    <div style="margin-top:var(--space-xl);">
+      <p class="sg-label" style="margin-bottom:var(--space-md);">States</p>
+      <div style="display:flex;gap:var(--space-md);flex-wrap:wrap;max-width:600px;">
+        <div class="form-group" style="flex:1;min-width:150px;">
+          <label class="form-label">Default</label>
+          <input class="form-input" type="text" placeholder="Placeholder text" />
+        </div>
+        <div class="form-group" style="flex:1;min-width:150px;">
+          <label class="form-label">Error</label>
+          <input class="form-input" type="text" value="Bad input here" style="border-color:var(--color-orange);" />
+          <span class="form-error">This field is required.</span>
+        </div>
+        <div class="form-group" style="flex:1;min-width:150px;">
+          <label class="form-label">Disabled</label>
+          <input class="form-input" type="text" value="Read-only value" disabled style="opacity:0.4;cursor:not-allowed;" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       COMPONENTS: CHAT + BULLETIN
+  ========================================================= -->
+  <section class="sg-section" id="components">
+    <p class="sg-section-title">07 — Core Components</p>
+
+    <div class="sg-row" style="align-items:flex-start; gap:var(--space-xl);">
+
+      <!-- Chat Window -->
+      <div style="flex:1;min-width:280px;">
+        <p class="sg-label" style="margin-bottom:var(--space-md);">AI Debate Bot</p>
+        <div class="chat-window">
+          <div class="chat-header">
+            <div class="chat-header-dot"></div>
+            <span class="chat-header-title">Debate AI — Active Session</span>
+          </div>
+          <div class="chat-messages">
+            <div class="chat-msg bot">
+              <span class="chat-sender">Aliyah AI</span>
+              <div class="chat-bubble">You said your reason is "my career." Let's examine that. Is it your career — or your comfort zone?</div>
+            </div>
+            <div class="chat-msg user">
+              <span class="chat-sender">You</span>
+              <div class="chat-bubble">I worked really hard to get to where I am. Starting over in Israel isn't realistic.</div>
+            </div>
+            <div class="chat-msg bot">
+              <span class="chat-sender">Aliyah AI</span>
+              <div class="chat-bubble">Interesting. Tel Aviv is now ranked in the top 20 global tech hubs. Your skills transfer. What you're describing sounds less like a career barrier and more like a fear of the unknown. Want to keep going?</div>
+            </div>
+          </div>
+          <div class="chat-input-row">
+            <input class="chat-input" type="text" placeholder="Make your case..." />
+            <button class="chat-send-btn">Send</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bulletin Board -->
+      <div style="flex:1;min-width:280px;">
+        <p class="sg-label" style="margin-bottom:var(--space-md);">Bulletin Board</p>
+        <div class="bulletin-board">
+          <div class="bulletin-header">
+            <div class="bulletin-title">The Wall of Excuses</div>
+            <div class="bulletin-subtitle">Anonymous · 247 posted this week · Vote, agree, push back</div>
+          </div>
+          <div class="bulletin-posts">
+
+            <div class="bulletin-post">
+              <span class="bulletin-post-tag"><span class="tag tag-outline">Career</span></span>
+              <div class="bulletin-post-author">Anonymous · New York</div>
+              <div class="bulletin-post-text">"My whole network is here. I can't just rebuild that in a new country."</div>
+              <div class="bulletin-votes">
+                <button class="bulletin-vote-btn">▲ 42 agree</button>
+                <button class="bulletin-vote-btn">↩ Debate this</button>
+              </div>
+            </div>
+
+            <div class="bulletin-post">
+              <span class="bulletin-post-tag"><span class="tag tag-orange">Family</span></span>
+              <div class="bulletin-post-author">Anonymous · California</div>
+              <div class="bulletin-post-text">"My parents are getting older. I'm not leaving them here alone."</div>
+              <div class="bulletin-votes">
+                <button class="bulletin-vote-btn">▲ 88 agree</button>
+                <button class="bulletin-vote-btn">↩ Debate this</button>
+              </div>
+            </div>
+
+            <div class="bulletin-post">
+              <span class="bulletin-post-tag"><span class="tag tag-yellow">Identity</span></span>
+              <div class="bulletin-post-author">Anonymous · Chicago</div>
+              <div class="bulletin-post-text">"I'm American first. Being Jewish doesn't mean I have to move."</div>
+              <div class="bulletin-votes">
+                <button class="bulletin-vote-btn">▲ 31 agree</button>
+                <button class="bulletin-vote-btn">↩ Debate this</button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       HERO PREVIEW
+  ========================================================= -->
+  <section class="sg-section" id="hero-preview">
+    <p class="sg-section-title">08 — Hero Layout Preview</p>
+
+    <div class="hero-preview">
+      <div class="hero-diagonal"></div>
+      <div class="hero-bg-text">
+        <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW</div>
+        <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW</div>
+        <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW</div>
+        <div class="hero-bg-line">ALIYAH NOW ALIYAH NOW</div>
+      </div>
+      <div class="hero-content">
+        <p class="hero-overline">A Grassroots Movement · 2026</p>
+        <h1 class="hero-title">
+          <span class="line-yellow">WHY</span><br>
+          ARE YOU<br>
+          <span class="line-outline">STILL</span><br>
+          HERE?
+        </h1>
+        <p class="hero-body">
+          Post your excuse. Debate our AI. Confront your identity.
+          This is the conversation American Jews haven't been willing to have.
+        </p>
+        <div class="btn-row">
+          <button class="btn btn-primary btn-lg btn-arrow">Post My Excuse</button>
+          <button class="btn btn-secondary">Start the Debate</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       SPACING
+  ========================================================= -->
+  <section class="sg-section" id="spacing">
+    <p class="sg-section-title">09 — Spacing Scale</p>
+    <div class="spacing-row">
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:4px;height:4px;"></div>
+        <p class="spacing-label">xs<br>4px</p>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:8px;height:8px;"></div>
+        <p class="spacing-label">sm<br>8px</p>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:16px;height:16px;"></div>
+        <p class="spacing-label">md<br>16px</p>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:32px;height:32px;"></div>
+        <p class="spacing-label">lg<br>32px</p>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:64px;height:64px;"></div>
+        <p class="spacing-label">xl<br>64px</p>
+      </div>
+      <div class="spacing-item">
+        <div class="spacing-box" style="width:96px;height:96px;"></div>
+        <p class="spacing-label">2xl<br>128px</p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- =========================================================
+       MOTIFS
+  ========================================================= -->
+  <section class="sg-section" id="motifs">
+    <p class="sg-section-title">10 — Motifs &amp; Icons</p>
+    <p class="t-body" style="margin-bottom:var(--space-xl);">
+      Jewish symbolic motifs used sparingly and with tension — not decoration.
+      The Star of David worn as protest insignia, not jewelry.
+    </p>
+
+    <div class="motif-row">
+
+      <div class="motif-item">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="24,4 28,14 39,14 30,21 33,32 24,26 15,32 18,21 9,14 20,14" fill="none" stroke="#f5c518" stroke-width="1.5"/>
+          <polygon points="24,2 44,36 4,36" fill="none" stroke="#f5c518" stroke-width="1.5"/>
+          <polygon points="24,46 4,12 44,12" fill="none" stroke="#f5c518" stroke-width="1.5"/>
+        </svg>
+        <p class="motif-label">Star of David<br>Outline Yellow</p>
+      </div>
+
+      <div class="motif-item">
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <polygon points="24,2 44,36 4,36" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1.5"/>
+          <polygon points="24,46 4,12 44,12" fill="rgba(245,197,24,0.15)" stroke="#f5c518" stroke-width="1.5"/>
+        </svg>
+        <p class="motif-label">Star of David<br>Filled Dim</p>
+      </div>
+
+      <div class="motif-item">
+        <!-- Simple Menorah SVG -->
+        <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- Base -->
+          <rect x="16" y="42" width="16" height="2" fill="#f5c518"/>
+          <!-- Stem -->
+          <rect x="23" y="22" width="2" height="20" fill="#f5c518"/>
+          <!-- Arms -->
+          <path d="M 8 22 Q 8 14 24 14 Q 40 14 40 22" stroke="#f5c518" stroke-width="1.5" fill="none"/>
+          <!-- Branch stems up -->
+          <rect x="7"  y="10" width="2" height="12" fill="#f5c518"/>
+          <rect x="13" y="12" width="2" height="10" fill="#f5c518"/>
+          <rect x="19" y="14" width="2" height="8"  fill="#f5c518"/>
+          <rect x="29" y="14" width="2" height="8"  fill="#f5c518"/>
+          <rect x="35" y="12" width="2" height="10" fill="#f5c518"/>
+          <rect x="39" y="10" width="2" height="12" fill="#f5c518"/>
+          <!-- Flames -->
+          <ellipse cx="8"  cy="9"  rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+          <ellipse cx="14" cy="11" rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+          <ellipse cx="20" cy="13" rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+          <ellipse cx="24" cy="11" rx="2" ry="3" fill="#f5c518"/>
+          <ellipse cx="30" cy="13" rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+          <ellipse cx="36" cy="11" rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+          <ellipse cx="40" cy="9"  rx="2" ry="3" fill="#f5c518" opacity="0.8"/>
+        </svg>
+        <p class="motif-label">Menorah<br>Yellow</p>
+      </div>
+
+      <div class="motif-item">
+        <div class="motif-question">?</div>
+        <p class="motif-label">Identity<br>Question Mark</p>
+      </div>
+
+      <div class="motif-item">
+        <div class="motif-arrow">→</div>
+        <p class="motif-label">Direction<br>Arrow East</p>
+      </div>
+
+      <div class="motif-item">
+        <div style="font-family:var(--font-display);font-size:32px;font-weight:900;color:var(--color-orange);line-height:1;text-transform:uppercase;letter-spacing:-0.02em;">!!!</div>
+        <p class="motif-label">Urgency<br>Exclamation</p>
+      </div>
+
+      <div class="motif-item">
+        <div style="font-family:var(--font-display);font-size:22px;font-weight:900;color:var(--color-yellow);line-height:1;text-transform:uppercase;letter-spacing:0.1em;border:2px solid var(--color-yellow);padding:8px 12px;">ENOUGH</div>
+        <p class="motif-label">Protest<br>Label Style</p>
+      </div>
+
+    </div>
+
+    <!-- Final note -->
+    <div style="margin-top:var(--space-2xl);border-top:var(--border-steel);padding-top:var(--space-xl);">
+      <p class="t-overline" style="margin-bottom:var(--space-sm);">Usage Note</p>
+      <p class="t-body">
+        These motifs appear in high-contrast, outline-first forms. They are never decorative —
+        always confrontational. Pair with protest typography, never with ornamental or religious framing.
+      </p>
+    </div>
+  </section>
+
+</body>
+</html>
