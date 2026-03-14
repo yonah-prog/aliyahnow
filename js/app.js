@@ -395,8 +395,9 @@ async function sendChatMessage(text) {
     });
 
     if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.error || `HTTP ${res.status}`);
+      const errBody = await res.json().catch(() => ({}));
+      console.error('API error detail:', errBody.detail, 'status:', errBody.status);
+      throw new Error(errBody.error || `HTTP ${res.status}`);
     }
 
     const { reply } = await res.json();

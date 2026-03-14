@@ -72,6 +72,11 @@ module.exports = async function handler(req, res) {
     return res.status(200).json({ reply: text });
   } catch (err) {
     console.error('Anthropic API error:', err);
-    return res.status(500).json({ error: 'AI service error. Please try again.' });
+    // Return actual error detail so we can debug
+    return res.status(500).json({
+      error: 'AI service error. Please try again.',
+      detail: err.message || String(err),
+      status: err.status,
+    });
   }
 };
